@@ -8495,7 +8495,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             }
             envc = 0;
             guest_envp = arg3;
-            for (gp = guest_envp; gp; gp += sizeof(abi_ulong)) {
+            for (gp = guest_envp; *(abi_ulong*)gp; gp += sizeof(abi_ulong)) {
                 /* QASAN: remove preloaded library */
                 if (!getenv("QASAN_PRESERVE_EXECVE")) {
                     /*
